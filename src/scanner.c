@@ -21,7 +21,7 @@ static bool scan_template_fragment(TSLexer *lexer) {
   for (bool has_content = false;; has_content = true) {
     lexer->mark_end(lexer);
     int lookahead = lexer->lookahead;
-    if (isspace(lookahead)) {
+    if (iswspace(lookahead)) {
       return has_content;
     }
     switch (lookahead) {
