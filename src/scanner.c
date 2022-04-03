@@ -3,7 +3,7 @@
 
 enum TokenType {
   AUTOMATIC_SEMICOLON,
-  TEMPLATE_CHARS,
+  TEMPLATE_FRAGMENT,
   TERNARY_QMARK,
 };
 
@@ -16,11 +16,15 @@ void tree_sitter_javascript_external_scanner_deserialize(void *p, const char *b,
 static void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
-static bool scan_template_chars(TSLexer *lexer) {
-  lexer->result_symbol = TEMPLATE_CHARS;
+static bool scan_template_fragment(TSLexer *lexer) {
+  lexer->result_symbol = TEMPLATE_FRAGMENT;
   for (bool has_content = false;; has_content = true) {
     lexer->mark_end(lexer);
-    switch (lexer->lookahead) {
+    int lookahead = lexer->lookahead;
+    if (isspace(lookahead)) {
+      return has_content;
+    }
+    switch (lookahead) {
       case '`':
         return has_content;
       case '\0':
@@ -30,6 +34,10 @@ static bool scan_template_chars(TSLexer *lexer) {
         if (lexer->lookahead == '{') return has_content;
         break;
       case '\\':
+        return has_content;
+      case ' ':
+        return has_content;
+      case '\n':
         return has_content;
       default:
         advance(lexer);
@@ -170,9 +178,9 @@ static bool scan_ternary_qmark(TSLexer *lexer) {
 
 bool tree_sitter_javascript_external_scanner_scan(void *payload, TSLexer *lexer,
                                                   const bool *valid_symbols) {
-  if (valid_symbols[TEMPLATE_CHARS]) {
+  if (valid_symbols[TEMPLATE_FRAGMENT]) {
     if (valid_symbols[AUTOMATIC_SEMICOLON]) return false;
-    return scan_template_chars(lexer);
+    return scan_template_fragment(lexer);
   } else if (valid_symbols[AUTOMATIC_SEMICOLON]) {
     bool ret = scan_automatic_semicolon(lexer);
     if (!ret && valid_symbols[TERNARY_QMARK] && lexer->lookahead == '?')

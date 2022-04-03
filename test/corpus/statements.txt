@@ -544,7 +544,10 @@ Comments
   (expression_statement (object
     (comment)
     (pair (property_identifier) (number))
-    (comment)
+    (comment_block
+      (comment_block_start)
+      (comment_block_fragment)
+      (comment_block_end))
     (pair (property_identifier) (function (formal_parameters) (statement_block))))))
 
 ==========================================
@@ -576,7 +579,12 @@ var thing = {
       (comment)
       (comment)
       (pair (property_identifier) (function
-        (formal_parameters (identifier) (comment))
+        (formal_parameters 
+          (identifier) 
+          (comment_block
+            (comment_block_start)
+            (comment_block_fragment)
+            (comment_block_end)))
         (statement_block
           (comment)
           (expression_statement
@@ -606,13 +614,25 @@ const d = 1;
 ---
 
 (program
-  (comment)
+  (comment_block
+    (comment_block_start)
+    (comment_block_fragment)
+    (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number)))
-  (comment)
+  (comment_block
+    (comment_block_start)
+    (comment_block_fragment)
+    (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number)))
-  (comment)
+  (comment_block
+    (comment_block_start)
+    (comment_block_fragment)
+    (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number)))
-  (comment)
+  (comment_block
+    (comment_block_start)
+    (comment_block_fragment)
+    (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number))))
 
 ==========================================
@@ -667,7 +687,7 @@ throw new Error("uh oh");
 
 (program
   (throw_statement
-    (new_expression (identifier) (arguments (string (string_fragment))))))
+    (new_expression (identifier) (arguments (string (string_fragment) (string_fragment))))))
 
 ============================================
 Throw statements with sequence expressions
@@ -835,3 +855,31 @@ console.log("HI")
         (property_identifier))
       (arguments
         (string (string_fragment))))))
+
+==========================================
+Template substitution
+==========================================
+
+const a = 1;
+
+`a + 1: `
+${a + 1}
+
+const b = 2;
+
+---
+
+(program
+  (lexical_declaration
+    (variable_declarator (identifier) (number)))
+  (expression_statement
+    (template_string
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)))
+  (template_substitution
+    (binary_expression
+      (identifier)
+      (number)))
+  (lexical_declaration
+    (variable_declarator (identifier) (number))))

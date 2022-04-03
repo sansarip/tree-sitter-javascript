@@ -281,9 +281,13 @@ let d
   (comment)
   (lexical_declaration
     (variable_declarator (identifier))
-    (comment)
+    (comment_block
+      (comment_block_start) (comment_block_fragment) (comment_block_end))
     (variable_declarator (identifier)))
-  (comment)
-  (comment)
-  (comment)
+  (comment_block
+      (comment_block_start) (comment_block_fragment) (comment_block_end))
+  (comment_block
+      (comment_block_start) (comment_block_fragment) (comment_block_end))
+  (comment_block
+      (comment_block_start) (comment_block_fragment) (comment_block_end))
   (lexical_declaration (variable_declarator (identifier))))

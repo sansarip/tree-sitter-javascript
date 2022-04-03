@@ -51,6 +51,21 @@ const últimaVez = 1
       (pair (property_identifier) (string (string_fragment)))
       (pair (string) (string)))))
 
+
+============================================
+Partial objects
+============================================
+
+{ a: 1, b: }
+
+---
+
+(program
+  (expression_statement
+    (object
+      (pair (property_identifier) (number))
+      (incomplete_pair (property_identifier)))))
+
 ==========================================
 Strings containing comment-like content
 ==========================================
@@ -87,7 +102,8 @@ Quote escaping
   (expression_statement (string (escape_sequence)))
   (expression_statement
     (string (string_fragment) (escape_sequence) (string_fragment)))
-  (expression_statement (string (string_fragment)))
+  (expression_statement 
+    (string (string_fragment) (string_fragment) (string_fragment) (string_fragment) (string_fragment)))
   (expression_statement (string (string_fragment))))
 
 ==========================================
@@ -121,8 +137,8 @@ world';
 ---
 
 (program
-  (expression_statement (string (string_fragment)))
-  (expression_statement (string (string_fragment))))
+  (expression_statement (string (string_fragment) (string_fragment)))
+  (expression_statement (string (string_fragment) (string_fragment))))
 
 =========================================================
 JSX strings with unescaped newlines for TSX attributes
@@ -141,13 +157,15 @@ JSX strings with unescaped newlines for TSX attributes
     (jsx_element
       (jsx_opening_element
         (identifier)
-        (jsx_attribute (property_identifier) (string (string_fragment))))
+        (jsx_attribute (property_identifier) 
+          (string (string_fragment) (string_fragment))))
       (jsx_closing_element
         (identifier))))
  (expression_statement
    (jsx_element
      (jsx_opening_element
        (identifier)
-       (jsx_attribute (property_identifier) (string (string_fragment))))
+       (jsx_attribute (property_identifier) 
+         (string (string_fragment) (string_fragment))))
      (jsx_closing_element
        (identifier)))))
