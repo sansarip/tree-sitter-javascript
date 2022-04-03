@@ -3,12 +3,13 @@ module.exports = grammar({
 
   externals: $ => [
     $._automatic_semicolon,
-    $._template_chars,
+    $.template_fragment,
     $._ternary_qmark,
   ],
 
   extras: $ => [
     $.comment,
+    $.comment_block,
     /[\s\p{Zs}\uFEFF\u2060\u200B]/,
   ],
 
@@ -222,7 +223,9 @@ module.exports = grammar({
       $.return_statement,
       $.throw_statement,
       $.empty_statement,
-      $.labeled_statement
+      $.labeled_statement,
+
+      $.template_substitution
     ),
 
     expression_statement: $ => seq(
@@ -486,6 +489,7 @@ module.exports = grammar({
       '{',
       commaSep(optional(choice(
         $.pair,
+        $.incomplete_pair,
         $.spread_element,
         $.method_definition,
         alias(
@@ -529,7 +533,7 @@ module.exports = grammar({
       '[',
       commaSep(optional(choice(
         $.expression,
-        $.spread_element
+        $.spread_element,
       ))),
       ']'
     ),
@@ -868,7 +872,8 @@ module.exports = grammar({
         '"',
         repeat(choice(
           alias($.unescaped_double_string_fragment, $.string_fragment),
-          $.escape_sequence
+          $.escape_sequence,
+          $._ws
         )),
         '"'
       ),
@@ -876,22 +881,26 @@ module.exports = grammar({
         "'",
         repeat(choice(
           alias($.unescaped_single_string_fragment, $.string_fragment),
-          $.escape_sequence
+          $.escape_sequence,
+          $._ws
         )),
         "'"
       )
     ),
 
+    _ws: $ => /[\s]+/, 
+    
     // Workaround to https://github.com/tree-sitter/tree-sitter/issues/1156
     // We give names to the token() constructs containing a regexp
     // so as to obtain a node in the CST.
     //
+    
     unescaped_double_string_fragment: $ =>
-      token.immediate(prec(1, /[^"\\]+/)),
+      token.immediate(prec(1, /[^"\\\s]+/)),
 
     // same here
     unescaped_single_string_fragment: $ =>
-      token.immediate(prec(1, /[^'\\]+/)),
+      token.immediate(prec(1, /[^'\\\s]+/)),
 
     escape_sequence: $ => token.immediate(seq(
       '\\',
@@ -905,19 +914,28 @@ module.exports = grammar({
     )),
 
     // http://stackoverflow.com/questions/13014947/regex-to-match-a-c-style-multiline-comment/36328890#36328890
-    comment: $ => token(choice(
+    comment: $ => token(
       seq('//', /.*/),
-      seq(
-        '/*',
-        /[^*]*\*+([^/*][^*]*\*+)*/,
-        '/'
-      )
-    )),
+    ),
+
+    comment_block: $ => seq( 
+        $.comment_block_start,
+        optional($.comment_block_fragment),
+        $.comment_block_end
+    ),
+
+    comment_block_fragment: $ => /[^*]*\*+([^/*][^*]*\*+)*/,
+    
+    comment_block_start: $ => '/*',
+
+    // Not sure of a way to capture the * here as well 😢 
+    comment_block_end: $ => '/',
 
     template_string: $ => seq(
       '`',
       repeat(choice(
-        $._template_chars,
+        $.template_fragment,
+        $._ws,
         $.escape_sequence,
         $.template_substitution
       )),
@@ -1110,6 +1128,11 @@ module.exports = grammar({
       field('key', $._property_name),
       ':',
       field('value', $.expression)
+    ),
+    
+    incomplete_pair: $ => seq(
+      field('key', $._property_name),
+      ':'
     ),
 
     pair_pattern: $ => seq(

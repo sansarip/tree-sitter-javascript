@@ -9,22 +9,32 @@ Strings
 
 'A string with new \
 line';
+''
+""
 
 ----
 
 (program
   (expression_statement
     (string
-      (string_fragment) (escape_sequence) (string_fragment)
-      (escape_sequence) (string_fragment)))
+      (string_fragment) (string_fragment) (string_fragment) 
+      (escape_sequence) (string_fragment) (escape_sequence) 
+      (string_fragment) (string_fragment) (string_fragment)))
   (expression_statement
      (string
-      (string_fragment) (escape_sequence) (string_fragment)
-      (escape_sequence) (string_fragment)))
+      (string_fragment) (string_fragment) (string_fragment)
+      (string_fragment) (string_fragment) (escape_sequence) 
+      (string_fragment) (escape_sequence) (string_fragment)))
   (expression_statement (string (escape_sequence)))
   (expression_statement (string (escape_sequence)))
   (expression_statement
-    (string (string_fragment) (escape_sequence) (string_fragment))))
+    (string 
+      (string_fragment) (string_fragment) (string_fragment)
+      (string_fragment) (escape_sequence) (string_fragment)))
+  (expression_statement
+    (string))
+  (expression_statement
+    (string)))
 
 ============================================
 Template strings
@@ -60,32 +70,81 @@ Template strings
 ----
 
 (program
-  (expression_statement (template_string))
-  (expression_statement (template_string))
+  (expression_statement 
+    (template_string
+      (template_fragment)
+      (template_fragment)))
+  (expression_statement 
+    (template_string
+      (template_fragment)
+      (template_fragment)))
+  (expression_statement 
+    (template_string
+      (template_fragment)
+      (template_substitution
+        (binary_expression (number) (number)))
+      (template_fragment)
+      (template_substitution (sequence_expression
+        (binary_expression (number) (number))
+        (binary_expression (number) (number))))
+      (template_fragment)))
+  (expression_statement 
+    (template_string
+      (template_fragment)))
+  (expression_statement 
+    (template_string
+      (template_fragment)
+      (template_substitution (number))))
+	(expression_statement 
+    (template_string
+      (template_fragment)))
+	(expression_statement 
+    (template_string
+      (template_fragment)))
   (expression_statement (template_string
-    (template_substitution
-      (binary_expression (number) (number)))
-    (template_substitution (sequence_expression
-      (binary_expression (number) (number))
-      (binary_expression (number) (number))))))
-  (expression_statement (template_string))
-  (expression_statement (template_string
-    (template_substitution (number))))
-	(expression_statement (template_string))
-	(expression_statement (template_string))
-  (expression_statement (template_string
-    (template_substitution (string (string_fragment)))
-    (template_substitution (string (string_fragment)))))
+    (template_fragment)
+    (template_substitution 
+      (string (string_fragment)))
+    (template_fragment)
+    (template_substitution 
+      (string (string_fragment)))
+    (template_fragment)))
   (expression_statement (template_string (escape_sequence)))
-  (expression_statement (template_string
-    (escape_sequence)
-    (template_substitution (call_expression
-      (member_expression (identifier) (property_identifier))
-      (arguments (string (string_fragment)))))
-    (escape_sequence)
-    (template_substitution (identifier))))
-  (expression_statement (template_string (escape_sequence)))
-  (expression_statement (template_string)))
+  (expression_statement 
+    (template_string
+      (template_fragment)
+      (template_fragment)
+      (escape_sequence)
+      (template_fragment)
+      (template_substitution (call_expression
+        (member_expression (identifier) (property_identifier))
+        (arguments (string))))
+      (escape_sequence)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_substitution (identifier))
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)
+      (template_fragment)))
+  (expression_statement 
+    (template_string 
+      (escape_sequence)))
+  (expression_statement 
+    (template_string
+      (template_fragment))))
 
 ============================================
 Function calls with template strings
@@ -96,7 +155,11 @@ f `hello`;
 ---
 
 (program
-  (expression_statement (call_expression (identifier) (template_string))))
+  (expression_statement
+    (call_expression 
+      (identifier) 
+      (template_string
+        (template_fragment)))))
 
 ============================================
 Numbers
@@ -206,7 +269,14 @@ Comments take precedence over regexes
 
 ---
 
-(program (expression_statement (ternary_expression (identifier) (comment) (identifier) (identifier))))
+(program
+ (expression_statement 
+   (ternary_expression 
+     (identifier) 
+     (comment_block
+       (comment_block_start) (comment_block_fragment) (comment_block_end))
+     (identifier) 
+     (identifier))))
 
 ============================================
 Objects

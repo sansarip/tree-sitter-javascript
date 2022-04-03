@@ -284,6 +284,10 @@
         "named": true
       },
       {
+        "type": "template_substitution",
+        "named": true
+      },
+      {
         "type": "throw_statement",
         "named": true
       },
@@ -931,6 +935,34 @@
         }
       ]
     }
+  },
+  {
+    "type": "comment_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "comment_block_end",
+          "named": true
+        },
+        {
+          "type": "comment_block_fragment",
+          "named": true
+        },
+        {
+          "type": "comment_block_start",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "comment_block_end",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "computed_property_name",
@@ -1677,6 +1709,38 @@
     }
   },
   {
+    "type": "incomplete_pair",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "computed_property_name",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "private_property_identifier",
+            "named": true
+          },
+          {
+            "type": "property_identifier",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "jsx_attribute",
     "named": true,
     "fields": {},
@@ -2192,6 +2256,10 @@
       "required": false,
       "types": [
         {
+          "type": "incomplete_pair",
+          "named": true
+        },
+        {
           "type": "method_definition",
           "named": true
         },
@@ -2687,6 +2755,10 @@
       "types": [
         {
           "type": "escape_sequence",
+          "named": true
+        },
+        {
+          "type": "template_fragment",
           "named": true
         },
         {
@@ -3255,6 +3327,14 @@
     "named": true
   },
   {
+    "type": "comment_block_fragment",
+    "named": true
+  },
+  {
+    "type": "comment_block_start",
+    "named": true
+  },
+  {
     "type": "const",
     "named": false
   },
@@ -3421,6 +3501,10 @@
   {
     "type": "target",
     "named": false
+  },
+  {
+    "type": "template_fragment",
+    "named": true
   },
   {
     "type": "this",
