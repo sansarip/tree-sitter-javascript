@@ -5,6 +5,7 @@ module.exports = grammar({
     $._automatic_semicolon,
     $.template_fragment,
     $._ternary_qmark,
+    $.comment_block_fragment,
   ],
 
   extras: $ => [
@@ -67,6 +68,7 @@ module.exports = grammar({
     [$.primary_expression, $.statement_block, 'object'],
     [$.import_statement, $.import],
     [$.export_statement, $.primary_expression],
+    [$.comment_block_end, $.comment_block_fragment]
   ],
 
   conflicts: $ => [
@@ -83,7 +85,7 @@ module.exports = grammar({
     [$.assignment_expression, $.object_assignment_pattern],
     [$.labeled_statement, $._property_name],
     [$.computed_property_name, $.array],
-    [$.binary_expression, $._initializer],
+    [$.binary_expression, $._initializer]
   ],
 
   word: $ => $.identifier,
@@ -920,16 +922,13 @@ module.exports = grammar({
 
     comment_block: $ => seq( 
         $.comment_block_start,
-        optional($.comment_block_fragment),
+        $.comment_block_fragment,
         $.comment_block_end
     ),
 
-    comment_block_fragment: $ => /[^*]*\*+([^/*][^*]*\*+)*/,
-    
     comment_block_start: $ => '/*',
 
-    // Not sure of a way to capture the * here as well 😢 
-    comment_block_end: $ => '/',
+    comment_block_end: $ => '*/',
 
     template_string: $ => seq(
       '`',

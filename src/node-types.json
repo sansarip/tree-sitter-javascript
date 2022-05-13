@@ -960,11 +960,6 @@
     }
   },
   {
-    "type": "comment_block_end",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "computed_property_name",
     "named": true,
     "fields": {},
@@ -3324,6 +3319,10 @@
   },
   {
     "type": "comment",
+    "named": true
+  },
+  {
+    "type": "comment_block_end",
     "named": true
   },
   {
