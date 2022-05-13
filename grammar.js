@@ -5,7 +5,7 @@ module.exports = grammar({
     $._automatic_semicolon,
     $.template_fragment,
     $._ternary_qmark,
-    $.comment_block_fragment,
+    $.comment_block_content,
   ],
 
   extras: $ => [
@@ -67,8 +67,7 @@ module.exports = grammar({
     ['declaration', 'literal'],
     [$.primary_expression, $.statement_block, 'object'],
     [$.import_statement, $.import],
-    [$.export_statement, $.primary_expression],
-    [$.comment_block_end, $.comment_block_fragment]
+    [$.export_statement, $.primary_expression]
   ],
 
   conflicts: $ => [
@@ -922,7 +921,7 @@ module.exports = grammar({
 
     comment_block: $ => seq( 
         $.comment_block_start,
-        $.comment_block_fragment,
+        $.comment_block_content,
         $.comment_block_end
     ),
 

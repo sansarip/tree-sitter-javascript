@@ -5,7 +5,7 @@ enum TokenType {
   AUTOMATIC_SEMICOLON,
   TEMPLATE_FRAGMENT,
   TERNARY_QMARK,
-  COMMENT_BLOCK_FRAGMENT
+  COMMENT_BLOCK_CONTENT
 };
 
 void *tree_sitter_javascript_external_scanner_create() { return NULL; }
@@ -177,8 +177,8 @@ static bool scan_ternary_qmark(TSLexer *lexer) {
   return false;
 }
 
-static bool scan_comment_block_fragment(TSLexer *lexer) {
-  lexer->result_symbol = COMMENT_BLOCK_FRAGMENT;
+static bool scan_comment_block_content(TSLexer *lexer) {
+  lexer->result_symbol = COMMENT_BLOCK_CONTENT;
   for (bool has_content = false;; has_content = true) {
     lexer->mark_end(lexer);
     int lookahead = lexer->lookahead;
@@ -209,8 +209,8 @@ bool tree_sitter_javascript_external_scanner_scan(void *payload, TSLexer *lexer,
   if (valid_symbols[TERNARY_QMARK]) {
     return scan_ternary_qmark(lexer);
   }
-  if (valid_symbols[COMMENT_BLOCK_FRAGMENT]) {
-    return scan_comment_block_fragment(lexer);
+  if (valid_symbols[COMMENT_BLOCK_CONTENT]) {
+    return scan_comment_block_content(lexer);
   }
 
   return false;

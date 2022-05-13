@@ -546,7 +546,7 @@ Comments
     (pair (property_identifier) (number))
     (comment_block
       (comment_block_start)
-      (comment_block_fragment)
+      (comment_block_content)
       (comment_block_end))
     (pair (property_identifier) (function (formal_parameters) (statement_block))))))
 
@@ -583,7 +583,7 @@ var thing = {
           (identifier) 
           (comment_block
             (comment_block_start)
-            (comment_block_fragment)
+            (comment_block_content)
             (comment_block_end)))
         (statement_block
           (comment)
@@ -616,22 +616,22 @@ const d = 1;
 (program
   (comment_block
     (comment_block_start)
-    (comment_block_fragment)
+    (comment_block_content)
     (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number)))
   (comment_block
     (comment_block_start)
-    (comment_block_fragment)
+    (comment_block_content)
     (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number)))
   (comment_block
     (comment_block_start)
-    (comment_block_fragment)
+    (comment_block_content)
     (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number)))
   (comment_block
     (comment_block_start)
-    (comment_block_fragment)
+    (comment_block_content)
     (comment_block_end))
   (lexical_declaration (variable_declarator (identifier) (number))))
 

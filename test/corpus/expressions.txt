@@ -274,7 +274,7 @@ Comments take precedence over regexes
    (ternary_expression 
      (identifier) 
      (comment_block
-       (comment_block_start) (comment_block_fragment) (comment_block_end))
+       (comment_block_start) (comment_block_content) (comment_block_end))
      (identifier) 
      (identifier))))
 

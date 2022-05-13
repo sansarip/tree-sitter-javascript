@@ -282,12 +282,12 @@ let d
   (lexical_declaration
     (variable_declarator (identifier))
     (comment_block
-      (comment_block_start) (comment_block_fragment) (comment_block_end))
+      (comment_block_start) (comment_block_content) (comment_block_end))
     (variable_declarator (identifier)))
   (comment_block
-      (comment_block_start) (comment_block_fragment) (comment_block_end))
+      (comment_block_start) (comment_block_content) (comment_block_end))
   (comment_block
-      (comment_block_start) (comment_block_fragment) (comment_block_end))
+      (comment_block_start) (comment_block_content) (comment_block_end))
   (comment_block
-      (comment_block_start) (comment_block_fragment) (comment_block_end))
+      (comment_block_start) (comment_block_content) (comment_block_end))
   (lexical_declaration (variable_declarator (identifier))))

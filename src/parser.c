@@ -144,7 +144,7 @@ enum {
   sym__automatic_semicolon = 125,
   sym_template_fragment = 126,
   sym__ternary_qmark = 127,
-  sym_comment_block_fragment = 128,
+  sym_comment_block_content = 128,
   sym_program = 129,
   sym_export_statement = 130,
   sym_export_clause = 131,
@@ -401,7 +401,7 @@ static const char * const ts_symbol_names[] = {
   [sym__automatic_semicolon] = "_automatic_semicolon",
   [sym_template_fragment] = "template_fragment",
   [sym__ternary_qmark] = "\?",
-  [sym_comment_block_fragment] = "comment_block_fragment",
+  [sym_comment_block_content] = "comment_block_content",
   [sym_program] = "program",
   [sym_export_statement] = "export_statement",
   [sym_export_clause] = "export_clause",
@@ -658,7 +658,7 @@ static const TSSymbol ts_symbol_map[] = {
   [sym__automatic_semicolon] = sym__automatic_semicolon,
   [sym_template_fragment] = sym_template_fragment,
   [sym__ternary_qmark] = sym__ternary_qmark,
-  [sym_comment_block_fragment] = sym_comment_block_fragment,
+  [sym_comment_block_content] = sym_comment_block_content,
   [sym_program] = sym_program,
   [sym_export_statement] = sym_export_statement,
   [sym_export_clause] = sym_export_clause,
@@ -1299,7 +1299,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [sym_comment_block_fragment] = {
+  [sym_comment_block_content] = {
     .visible = true,
     .named = true,
   },
@@ -6094,14 +6094,14 @@ enum {
   ts_external_token__automatic_semicolon = 0,
   ts_external_token_template_fragment = 1,
   ts_external_token__ternary_qmark = 2,
-  ts_external_token_comment_block_fragment = 3,
+  ts_external_token_comment_block_content = 3,
 };
 
 static const TSSymbol ts_external_scanner_symbol_map[EXTERNAL_TOKEN_COUNT] = {
   [ts_external_token__automatic_semicolon] = sym__automatic_semicolon,
   [ts_external_token_template_fragment] = sym_template_fragment,
   [ts_external_token__ternary_qmark] = sym__ternary_qmark,
-  [ts_external_token_comment_block_fragment] = sym_comment_block_fragment,
+  [ts_external_token_comment_block_content] = sym_comment_block_content,
 };
 
 static const bool ts_external_scanner_states[7][EXTERNAL_TOKEN_COUNT] = {
@@ -6109,7 +6109,7 @@ static const bool ts_external_scanner_states[7][EXTERNAL_TOKEN_COUNT] = {
     [ts_external_token__automatic_semicolon] = true,
     [ts_external_token_template_fragment] = true,
     [ts_external_token__ternary_qmark] = true,
-    [ts_external_token_comment_block_fragment] = true,
+    [ts_external_token_comment_block_content] = true,
   },
   [2] = {
     [ts_external_token__ternary_qmark] = true,
@@ -6125,7 +6125,7 @@ static const bool ts_external_scanner_states[7][EXTERNAL_TOKEN_COUNT] = {
     [ts_external_token_template_fragment] = true,
   },
   [6] = {
-    [ts_external_token_comment_block_fragment] = true,
+    [ts_external_token_comment_block_content] = true,
   },
 };
 
@@ -6251,7 +6251,7 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym__automatic_semicolon] = ACTIONS(1),
     [sym_template_fragment] = ACTIONS(1),
     [sym__ternary_qmark] = ACTIONS(1),
-    [sym_comment_block_fragment] = ACTIONS(1),
+    [sym_comment_block_content] = ACTIONS(1),
   },
   [1] = {
     [sym_program] = STATE(1634),
@@ -79367,7 +79367,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(5), 1,
       sym_comment_block_start,
     ACTIONS(2985), 1,
-      sym_comment_block_fragment,
+      sym_comment_block_content,
     STATE(1574), 1,
       sym_comment_block,
   [58489] = 4,

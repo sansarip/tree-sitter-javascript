@@ -4859,7 +4859,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "comment_block_fragment"
+          "name": "comment_block_content"
         },
         {
           "type": "SYMBOL",
@@ -6525,16 +6525,6 @@
         "type": "SYMBOL",
         "name": "primary_expression"
       }
-    ],
-    [
-      {
-        "type": "SYMBOL",
-        "name": "comment_block_end"
-      },
-      {
-        "type": "SYMBOL",
-        "name": "comment_block_fragment"
-      }
     ]
   ],
   "externals": [
@@ -6552,7 +6542,7 @@
     },
     {
       "type": "SYMBOL",
-      "name": "comment_block_fragment"
+      "name": "comment_block_content"
     }
   ],
   "inline": [
