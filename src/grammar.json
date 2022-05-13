@@ -4858,8 +4858,16 @@
           "name": "comment_block_start"
         },
         {
-          "type": "SYMBOL",
-          "name": "comment_block_content"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "comment_block_content"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "SYMBOL",

@@ -921,7 +921,7 @@ module.exports = grammar({
 
     comment_block: $ => seq( 
         $.comment_block_start,
-        $.comment_block_content,
+        optional($.comment_block_content),
         $.comment_block_end
     ),
 

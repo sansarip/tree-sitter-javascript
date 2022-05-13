@@ -169,3 +169,21 @@ JSX strings with unescaped newlines for TSX attributes
          (string (string_fragment) (string_fragment))))
      (jsx_closing_element
        (identifier)))))
+
+=========================================================
+Comment blocks
+=========================================================
+
+
+/*hello world*/
+
+/* */
+
+/**/
+
+---
+
+(program
+  (comment_block (comment_block_start) (comment_block_content) (comment_block_end))
+  (comment_block (comment_block_start) (comment_block_content) (comment_block_end))
+  (comment_block (comment_block_start) (comment_block_end)))
