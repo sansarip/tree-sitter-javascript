@@ -1354,13 +1354,13 @@ a = <E><></></E>;
   (expression_statement
     (assignment_expression
       (identifier)
-      (jsx_fragment)))
+      (jsx_fragment (jsx_fragment_start_tag) (jsx_fragment_end_tag))))
   (expression_statement
     (assignment_expression
       (identifier)
       (jsx_element
         (jsx_opening_element (identifier))
-        (jsx_fragment)
+        (jsx_fragment (jsx_fragment_start_tag) (jsx_fragment_end_tag))
         (jsx_closing_element (identifier))))))
 
 ==============================================
@@ -1502,7 +1502,12 @@ i = <Foo:Bar bar={}>{...children}</Foo:Bar>
       (jsx_opening_element (nested_identifier (identifier) (identifier)))
       (jsx_closing_element (nested_identifier (identifier) (identifier))))))
   (expression_statement (assignment_expression (identifier)
-    (jsx_fragment (jsx_text) (jsx_self_closing_element (identifier)) (jsx_text))))
+    (jsx_fragment 
+      (jsx_fragment_start_tag) 
+      (jsx_text) 
+      (jsx_self_closing_element (identifier))
+      (jsx_text)
+      (jsx_fragment_end_tag))))
   (expression_statement (assignment_expression (identifier)
     (jsx_element
       (jsx_opening_element (identifier))

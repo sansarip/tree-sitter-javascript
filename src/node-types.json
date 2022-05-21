@@ -1879,7 +1879,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "jsx_element",
@@ -1891,6 +1891,14 @@
         },
         {
           "type": "jsx_fragment",
+          "named": true
+        },
+        {
+          "type": "jsx_fragment_end_tag",
+          "named": true
+        },
+        {
+          "type": "jsx_fragment_start_tag",
           "named": true
         },
         {
@@ -3420,6 +3428,14 @@
   {
     "type": "instanceof",
     "named": false
+  },
+  {
+    "type": "jsx_fragment_end_tag",
+    "named": true
+  },
+  {
+    "type": "jsx_fragment_start_tag",
+    "named": true
   },
   {
     "type": "jsx_text",
