@@ -84,7 +84,9 @@ module.exports = grammar({
     [$.assignment_expression, $.object_assignment_pattern],
     [$.labeled_statement, $._property_name],
     [$.computed_property_name, $.array],
-    [$.binary_expression, $._initializer]
+    [$.binary_expression, $._initializer],
+    [$.jsx_opening_element, $.jsx_self_closing_element, $.jsx_attribute],
+    [$.jsx_self_closing_element, $.jsx_attribute]
   ],
 
   word: $ => $.identifier,
@@ -548,7 +550,7 @@ module.exports = grammar({
       ']'
     ),
 
-    _jsx_element: $ => choice($.jsx_element, $.jsx_self_closing_element),
+    _jsx_element: $ => choice($.jsx_element, $.jsx_self_closing_element,),
 
     jsx_element: $ => seq(
       field('open_tag', $.jsx_opening_element),
@@ -618,7 +620,7 @@ module.exports = grammar({
 
     jsx_self_closing_element: $ => seq(
       '<',
-      field('name', $._jsx_element_name),
+      optional(field('name', $._jsx_element_name)),
       repeat(field('attribute', $._jsx_attribute)),
       '/',
       '>'

@@ -1347,6 +1347,8 @@ Anonymous JSX element
 
 a = <></>;
 a = <E><></></E>;
+a = </>;
+a = <style=''/>;
 
 ---
 
@@ -1361,7 +1363,18 @@ a = <E><></></E>;
       (jsx_element
         (jsx_opening_element (identifier))
         (jsx_fragment (jsx_fragment_start_tag) (jsx_fragment_end_tag))
-        (jsx_closing_element (identifier))))))
+        (jsx_closing_element (identifier)))))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (jsx_self_closing_element)))
+  (expression_statement
+    (assignment_expression
+      (identifier)
+      (jsx_self_closing_element
+        (jsx_attribute
+          (property_identifier)
+          (string))))))
 
 ==============================================
 Expressions within JSX elements

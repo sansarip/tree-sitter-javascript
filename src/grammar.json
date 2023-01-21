@@ -2603,12 +2603,20 @@
           "value": "<"
         },
         {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_jsx_element_name"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_jsx_element_name"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "REPEAT",
@@ -6377,6 +6385,15 @@
     [
       "binary_expression",
       "_initializer"
+    ],
+    [
+      "jsx_opening_element",
+      "jsx_self_closing_element",
+      "jsx_attribute"
+    ],
+    [
+      "jsx_self_closing_element",
+      "jsx_attribute"
     ]
   ],
   "precedences": [
