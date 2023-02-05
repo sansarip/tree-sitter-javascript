@@ -294,6 +294,10 @@ Objects
   }
 }
 
+{
+  []: i
+}
+
 ---
 
 (program
@@ -308,7 +312,9 @@ Objects
   (expression_statement (object
     (pair (property_identifier) (identifier))))
   (expression_statement (object
-    (method_definition (computed_property_name (identifier)) (formal_parameters) (statement_block)))))
+    (method_definition (computed_property_name (identifier)) (formal_parameters) (statement_block))))
+  (expression_statement (object
+    (pair (computed_property_name) (identifier)))))
 
 ============================================
 Objects with shorthand properties

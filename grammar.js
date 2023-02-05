@@ -1158,7 +1158,7 @@ module.exports = grammar({
 
     computed_property_name: $ => seq(
       '[',
-      $.expression,
+      optional($.expression),
       ']'
     ),
 
