@@ -86,7 +86,7 @@ module.exports = grammar({
     [$.computed_property_name, $.array],
     [$.binary_expression, $._initializer],
     [$.jsx_opening_element, $.jsx_self_closing_element, $.jsx_attribute],
-    [$.jsx_self_closing_element, $.jsx_attribute]
+    [$.jsx_self_closing_element, $.jsx_attribute],
   ],
 
   word: $ => $.identifier,
@@ -558,9 +558,9 @@ module.exports = grammar({
       field('close_tag', $.jsx_closing_element)
     ),
 
-    jsx_fragment_start_tag: $ => "<>",
+    jsx_fragment_start_tag: $ => seq("<", ">"),
 
-    jsx_fragment_end_tag: $ => "</>",
+    jsx_fragment_end_tag: $ => seq("<", "/>"),
 
     jsx_fragment: $ => seq($.jsx_fragment_start_tag, repeat($._jsx_child), $.jsx_fragment_end_tag),
 
